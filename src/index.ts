@@ -2,6 +2,7 @@
 
 console.log("Välkommen till Henriettas film-streaming");
 
+// Setting the data types for the movie objects
 interface IMovie {
     id: number;
     title: string;
@@ -18,6 +19,7 @@ interface IRating {
     score: string;
 }
 
+// Creating the data which will be used to display HTML. Can be removed and use API instead.
 const movies: IMovie[] = [
     {
         id: 1,
@@ -160,6 +162,7 @@ movies.forEach((movie) => {
 
     if (wrapper) {
 
+        // Event listener when hovering a card
         card.addEventListener("mouseover", () => {
             selectMovie(movie);
             const currentHover = document.querySelector(".movie-card.hover")
@@ -169,7 +172,7 @@ movies.forEach((movie) => {
             card.classList.add("hover");
         })
 
-
+        // Event listener when selecting a card
         card.addEventListener("click", () => {
             selectMovie(movie);
             console.log("Du har valt", movie.title);
@@ -193,4 +196,6 @@ movies.forEach((movie) => {
     console.log(movie.title, movie.runtime);
 })
 
+// TODO: add a search function
 
+// TODO: display selectMovie in html element with className "single-movie"

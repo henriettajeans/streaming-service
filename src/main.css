@@ -3,12 +3,27 @@ html {
 }
 
 body {
-    /* width: 100vw; */
-    /* height: calc(100vh - 3rem); */
     background-color: rgb(247, 236, 243);
     border: 1rem solid rgb(225, 177, 193);
     border-radius: 2rem;
     text-wrap: pretty;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Ribeye", serif;
+    }
+
+    p,
+    span,
+    a,
+    ul,
+    li {
+        font-family: "Quicksand", sans-serif;
+    }
 }
 
 .wrapper {
@@ -30,8 +45,6 @@ body {
 
         .movie-card.active {
             border: 2px dashed pink;
-            /* border-style: inset; */
-
         }
 
         .movie-card.hover {
@@ -48,6 +61,5 @@ body {
         margin: 1rem 2rem 5rem 2rem;
         border-radius: 2rem;
         box-shadow: 1px 1px 10px 1px rgb(210, 192, 207);
-        /* height: 30rem; */
     }
 }
