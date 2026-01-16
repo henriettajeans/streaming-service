@@ -115,6 +115,18 @@ const movies: IMovie[] = [
             score: "6.7 / 10"
         }
     },
+    {
+        id: 9,
+        title: "Ocean's Eleven",
+        year: 2022,
+        runtime: 132,
+        director: "George Clooney",
+        plot: "Ett gäng medelklass-amerikaner bestämmer sig för att genomföra ett rån.",
+        rating: {
+            source: "IMDB",
+            score: "6.7 / 10"
+        }
+    }
 ];
 
 const wrapper = document.querySelector(".movie-wrapper");
@@ -147,12 +159,23 @@ movies.forEach((movie) => {
 
 
     if (wrapper) {
+
+        card.addEventListener("mouseover", () => {
+            selectMovie(movie);
+            const currentHover = document.querySelector(".movie-card.hover")
+            if (currentHover) {
+                currentHover.classList.remove("hover");
+            }
+            card.classList.add("hover");
+        })
+
+
         card.addEventListener("click", () => {
             selectMovie(movie);
             console.log("Du har valt", movie.title);
             const currentSelect = document.querySelector(".movie-card.active")
             if (currentSelect) {
-                currentSelect.classList.remove("avtive");
+                currentSelect.classList.remove("active");
             }
             card.classList.add("active");
         })
