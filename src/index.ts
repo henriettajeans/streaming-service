@@ -19,6 +19,8 @@ interface IRating {
     score: string;
 }
 
+type WatchList = "listed" | "unlisted";
+
 // Creating the data which will be used to display HTML. Can be removed and use API instead.
 const movies: IMovie[] = [
     {
@@ -131,7 +133,18 @@ const movies: IMovie[] = [
     }
 ];
 
+// Set VARIABLES to the static HTML elements
 const wrapper = document.querySelector(".movie-wrapper");
+const singleMovie = document.querySelector(".single-movie");
+const movieTitle = document.querySelector(".single-movie__title");
+const movieSynopsis = document.querySelector(".single-movie__synopsis");
+const playButton = document.querySelector(".single-movie__play-btn") as HTMLButtonElement;
+const addButton = document.querySelector(".single-movie__add-btn") as HTMLButtonElement;
+
+// Add variable to type WatchList
+let listStatus: WatchList = "unlisted";
+
+console.log(listStatus);
 
 // Loop through the movie array and display the data as HTML elements
 movies.forEach((movie) => {
@@ -164,7 +177,6 @@ movies.forEach((movie) => {
 
         // Event listener when hovering a card
         card.addEventListener("mouseover", () => {
-            selectMovie(movie);
             const currentHover = document.querySelector(".movie-card.hover")
             if (currentHover) {
                 currentHover.classList.remove("hover");
@@ -186,15 +198,44 @@ movies.forEach((movie) => {
         // Let card be child to wrapper, and display HTML in DOM
         wrapper.appendChild(card);
     }
-    function selectMovie(movie: IMovie) {
-        if (title) {
-            title.textContent = movie.title;
+    // function selectMovie(movie: IMovie) {
+    //     if (title) {
+    //         title.textContent = movie.title;
+    //     }
+    // console.log(movie.title, movie.runtime);
+    // }
+}
+)
+
+// This if statement could be displayed inside the selectMovie function
+if (addButton) {
+    addButton.addEventListener("click", () => {
+        // console.log("clicked")
+        const iconEvent = addButton.querySelector(".single-movie__add-Btn__icon");
+        if (listStatus === "unlisted") {
+            listStatus = "listed";
+            if (iconEvent) {
+                iconEvent.textContent = "☑️";
+                console.log("Added")
+            }
+        } else {
+            listStatus = "unlisted";
+            console.log("Borttagen")
+            if (iconEvent) {
+                iconEvent.textContent = "Lägg till i listan";
+            }
         }
 
-    }
+    })
+}
 
-    console.log(movie.title, movie.runtime);
-})
+function selectMovie(movie: IMovie) {
+    if (movieTitle) {
+        movieTitle.textContent = movie.title;
+    }
+    // console.log(movie.title, movie.runtime);
+
+}
 
 // TODO: add a search function
 
