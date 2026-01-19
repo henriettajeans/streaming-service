@@ -141,71 +141,86 @@ const movieSynopsis = document.querySelector(".single-movie__synopsis");
 const playButton = document.querySelector(".single-movie__play-btn") as HTMLButtonElement;
 const addButton = document.querySelector(".single-movie__add-btn") as HTMLButtonElement;
 
+//Variables to form dialog
+const formDialog = document.querySelector("#add-review-dialog") as HTMLDialogElement;
+const openBtn = document.querySelector("#open-btn") as HTMLButtonElement;
+const submitBtn = document.querySelector("#submit-btn") as HTMLButtonElement;
+const closeBtn = document.querySelector("#close-btn") as HTMLButtonElement;
+const addForm = document.querySelector("#add-review-form") as HTMLFormElement;
+const nameInput = document.querySelector("#name-input") as HTMLInputElement;
+const messageInput = document.querySelector("#message-input") as HTMLInputElement;
+const mailInput = document.querySelector("#email-input") as HTMLInputElement;
+
+
 // Add variable to type WatchList
 let listStatus: WatchList = "unlisted";
-
 console.log(listStatus);
 
-// Loop through the movie array and display the data as HTML elements
-movies.forEach((movie) => {
-    // Creating HTML elements
-    const card = document.createElement("article");
-    const title = document.createElement("h3");
-    const plot = document.createElement("p");
-    const runtime = document.createElement("span");
-    const director = document.createElement("span");
-
-    // Creating CSS classes
-    card.classList.add("movie-card");
-    title.classList.add("movie-card__title");
-    plot.classList.add("movie-card__plot");
-    runtime.classList.add("movie-card__runtime");
-    director.classList.add("movie-card__director");
-
-
-    // Display data inside variables
-    title.textContent = movie.title;
-    plot.textContent = movie.plot;
-    director.textContent = movie.director;
-
-
-    // Set parent and children elements
-    card.append(title, plot, runtime, director);
-
+function renderMovies() {
 
     if (wrapper) {
 
-        // Event listener when hovering a card
-        card.addEventListener("mouseover", () => {
-            const currentHover = document.querySelector(".movie-card.hover")
-            if (currentHover) {
-                currentHover.classList.remove("hover");
-            }
-            card.classList.add("hover");
-        })
-
-        // Event listener when selecting a card
-        card.addEventListener("click", () => {
-            selectMovie(movie);
-            console.log("Du har valt", movie.title);
-            const currentSelect = document.querySelector(".movie-card.active")
-            if (currentSelect) {
-                currentSelect.classList.remove("active");
-            }
-            card.classList.add("active");
-        })
-
-        // Let card be child to wrapper, and display HTML in DOM
-        wrapper.appendChild(card);
+        // If array with movies is updated
+        wrapper.replaceChildren();
     }
-    // function selectMovie(movie: IMovie) {
-    //     if (title) {
-    //         title.textContent = movie.title;
-    //     }
-    // console.log(movie.title, movie.runtime);
-    // }
+    // Loop through the movie array and display the data as HTML elements
+    movies.forEach(({ title, plot, id }) => {
+        // Creating HTML elements
+        const card = document.createElement("article");
+        const titleElement = document.createElement("h3");
+        const plotElement = document.createElement("p");
+        const runtime = document.createElement("span");
+        const director = document.createElement("span");
+
+        // Creating CSS classes
+        card.classList.add("movie-card");
+        titleElement.classList.add("movie-card__title");
+        plotElement.classList.add("movie-card__plot");
+        runtime.classList.add("movie-card__runtime");
+        director.classList.add("movie-card__director");
+
+
+        // Display data inside variables
+        titleElement.textContent = title;
+        plotElement.textContent = plot;
+        // director.textContent = director;
+
+
+        // Set parent and children elements
+        card.append(titleElement, plotElement);
+
+
+        if (wrapper) {
+
+            // Event listener when hovering a card
+            card.addEventListener("mouseover", () => {
+                const currentHover = document.querySelector(".movie-card.hover")
+                if (currentHover) {
+                    currentHover.classList.remove("hover");
+                }
+                card.classList.add("hover");
+            })
+
+            // Event listener when selecting a card
+            card.addEventListener("click", () => {
+                selectMovie(id);
+                console.log("Du har valt", title);
+                const currentSelect = document.querySelector(".movie-card.active")
+                if (currentSelect) {
+                    currentSelect.classList.remove("active");
+                }
+                card.classList.add("active");
+            })
+
+            // Let card be child to wrapper, and display HTML in DOM
+            wrapper.appendChild(card);
+        }
+
+    }
+    )
 }
-)
+
+renderMovies();
 
 // This if statement could be displayed inside the selectMovie function
 if (addButton) {
@@ -229,13 +244,49 @@ if (addButton) {
     })
 }
 
-function selectMovie(movie: IMovie) {
+if (playButton) {
+    playButton.addEventListener("click", () => {
+        console.log("Buffrar filmen....")
+    })
+}
+
+// Select a single movie from deconstructed id
+function selectMovie(id: number) {
+    const selectedMovie = movies.find((movie) => movie.id === id);
+
+    // If no id was found, exit the function
+
+    if (!selectedMovie) return;
+
     if (movieTitle) {
-        movieTitle.textContent = movie.title;
+        movieTitle.textContent = selectedMovie.title;
     }
+
     // console.log(movie.title, movie.runtime);
 
 }
+
+// Dialog and modals
+// TODO: create new interface and list with reviews. Either for the page itself or for each movie.
+openBtn.addEventListener("click", () => {
+    formDialog.showModal();
+    console.log("Klickat")
+})
+
+closeBtn.addEventListener("click", () => {
+    formDialog.close()
+})
+
+submitBtn.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = nameInput.value;
+    const message = messageInput.value;
+    const email = mailInput.value;
+    console.log("Skickat meddelande")
+})
+
+
 
 // TODO: add a search function
 
