@@ -2,6 +2,8 @@ import { IMovie } from "../models/IMovie.js";
 import { selectMovie } from "../components/SingleMovie.js";
 
 
+
+
 export const renderMovies = (containerId: string, movies: IMovie[]) => {
 
     const container = document.getElementById(containerId);

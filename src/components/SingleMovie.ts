@@ -1,5 +1,6 @@
-import { WatchList, IMovie } from "../models/IMovie";
-import { movies } from "../index.js";
+import { WatchList, IMovie } from "../models/IMovie.js";
+import { getMovie } from "../services/MovieService.js";
+import { renderMovies } from "./MovieList.js";
 
 let listStatus: WatchList = "unlisted";
 
@@ -11,7 +12,6 @@ const movieSynopsis = document.querySelector(".single-movie__synopsis");
 const playButton = document.querySelector(".single-movie__play-btn") as HTMLButtonElement;
 const addButton = document.querySelector(".single-movie__add-btn") as HTMLButtonElement;
 
-// This if statement could be displayed inside the selectMovie function
 
 // Buttons are static HTML elements and will always be displayed
 if (addButton) {
@@ -41,8 +41,21 @@ if (playButton) {
     })
 }
 
+const movies: IMovie[] = [];
+
+export async function initData() {
+    console.log("Initializing, getting data...")
+    try {
+        const movieData = await getMovie();
+        movies.push(...movieData);
+        renderMovies("movie-wrapper", movies);
+    } catch (error) {
+        console.error("Fel:", error)
+    }
+}
+
+
 // Select a single movie from deconstructed id
-// TODO: Move to SingleMovie component
 export function selectMovie(id: number) {
     const selectedMovie = movies.find((movie) => movie.id === id);
 

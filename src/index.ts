@@ -1,6 +1,7 @@
 
 import type { IMovie } from "./models/IMovie.js";
 import { renderMovies } from "./components/MovieList.js";
+import { initData } from "./components/SingleMovie.js"
 
 
 console.log("Välkommen till Henriettas film-streaming");
@@ -10,127 +11,127 @@ console.log("Välkommen till Henriettas film-streaming");
 
 
 // Creating the data which will be used to display HTML. Can be removed and use API instead.
-export const movies: IMovie[] = [
-    {
-        id: 1,
-        title: "Leva lite",
-        year: 2022,
-        runtime: 132,
-        director: "Hans Merkel",
-        plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
-        rating:
-        {
-            id: 1,
-            source: "IMDB",
-            score: "6.7 / 10"
-        },
+// export const movies: IMovie[] = [
+//     {
+//         id: 1,
+//         title: "Leva lite",
+//         year: 2022,
+//         runtime: 132,
+//         director: "Hans Merkel",
+//         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
+//         rating:
+//         {
+//             id: 1,
+//             source: "IMDB",
+//             score: "6.7 / 10"
+//         },
 
-    },
-    {
-        id: 2,
-        title: "Guardians",
-        year: 2022,
-        runtime: 132,
-        director: "Hans Merkel",
-        plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
-        rating: {
-            id: 1,
-            source: "IMDB",
-            score: "6.7 / 10"
-        }
-    },
-    {
-        id: 3,
-        title: "Musketörerna",
-        year: 2022,
-        runtime: 132,
-        director: "Hans Merkel",
-        plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
-        rating: {
-            id: 1,
-            source: "IMDB",
-            score: "6.7 / 10"
-        }
-    },
-    {
-        id: 4,
-        title: "The Post",
-        year: 2022,
-        runtime: 132,
-        director: "Hans Merkel",
-        plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
-        rating: {
-            id: 1,
-            source: "IMDB",
-            score: "6.7 / 10"
-        }
-    },
-    {
-        id: 5,
-        title: "Barcelona",
-        year: 2022,
-        runtime: 132,
-        director: "Hans Merkel",
-        plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
-        rating: {
-            id: 1,
-            source: "IMDB",
-            score: "6.7 / 10"
-        }
-    },
-    {
-        id: 6,
-        title: "Die Hard",
-        year: 2022,
-        runtime: 132,
-        director: "Hans Merkel",
-        plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
-        rating: {
-            id: 1,
-            source: "IMDB",
-            score: "6.7 / 10"
-        }
-    },
-    {
-        id: 7,
-        title: "Look Up",
-        year: 2022,
-        runtime: 132,
-        director: "Hans Merkel",
-        plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
-        rating: {
-            id: 1,
-            source: "IMDB",
-            score: "6.7 / 10"
-        }
-    },
-    {
-        id: 8,
-        title: "Hackers",
-        year: 2022,
-        runtime: 132,
-        director: "Hans Merkel",
-        plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
-        rating: {
-            id: 1,
-            source: "IMDB",
-            score: "6.7 / 10"
-        }
-    },
-    {
-        id: 9,
-        title: "Ocean's Eleven",
-        year: 2022,
-        runtime: 132,
-        director: "George Clooney",
-        plot: "Ett gäng medelklass-amerikaner bestämmer sig för att genomföra ett rån.",
-        rating: {
-            id: 1,
-            source: "IMDB",
-            score: "6.7 / 10"
-        }
-    }
-];
+//     },
+//     {
+//         id: 2,
+//         title: "Guardians",
+//         year: 2022,
+//         runtime: 132,
+//         director: "Hans Merkel",
+//         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
+//         rating: {
+//             id: 1,
+//             source: "IMDB",
+//             score: "6.7 / 10"
+//         }
+//     },
+//     {
+//         id: 3,
+//         title: "Musketörerna",
+//         year: 2022,
+//         runtime: 132,
+//         director: "Hans Merkel",
+//         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
+//         rating: {
+//             id: 1,
+//             source: "IMDB",
+//             score: "6.7 / 10"
+//         }
+//     },
+//     {
+//         id: 4,
+//         title: "The Post",
+//         year: 2022,
+//         runtime: 132,
+//         director: "Hans Merkel",
+//         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
+//         rating: {
+//             id: 1,
+//             source: "IMDB",
+//             score: "6.7 / 10"
+//         }
+//     },
+//     {
+//         id: 5,
+//         title: "Barcelona",
+//         year: 2022,
+//         runtime: 132,
+//         director: "Hans Merkel",
+//         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
+//         rating: {
+//             id: 1,
+//             source: "IMDB",
+//             score: "6.7 / 10"
+//         }
+//     },
+//     {
+//         id: 6,
+//         title: "Die Hard",
+//         year: 2022,
+//         runtime: 132,
+//         director: "Hans Merkel",
+//         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
+//         rating: {
+//             id: 1,
+//             source: "IMDB",
+//             score: "6.7 / 10"
+//         }
+//     },
+//     {
+//         id: 7,
+//         title: "Look Up",
+//         year: 2022,
+//         runtime: 132,
+//         director: "Hans Merkel",
+//         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
+//         rating: {
+//             id: 1,
+//             source: "IMDB",
+//             score: "6.7 / 10"
+//         }
+//     },
+//     {
+//         id: 8,
+//         title: "Hackers",
+//         year: 2022,
+//         runtime: 132,
+//         director: "Hans Merkel",
+//         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
+//         rating: {
+//             id: 1,
+//             source: "IMDB",
+//             score: "6.7 / 10"
+//         }
+//     },
+//     {
+//         id: 9,
+//         title: "Ocean's Eleven",
+//         year: 2022,
+//         runtime: 132,
+//         director: "George Clooney",
+//         plot: "Ett gäng medelklass-amerikaner bestämmer sig för att genomföra ett rån.",
+//         rating: {
+//             id: 1,
+//             source: "IMDB",
+//             score: "6.7 / 10"
+//         }
+//     }
+// ];
 
 // Set VARIABLES to the static HTML elements
 const wrapper = document.querySelector(".movie-wrapper");
@@ -146,10 +147,9 @@ const messageInput = document.querySelector("#message-input") as HTMLInputElemen
 const mailInput = document.querySelector("#email-input") as HTMLInputElement;
 
 
-// Add variable to type WatchList
+initData();
 
-
-renderMovies("movie-wrapper", movies);
+// renderMovies("movie-wrapper", movies);
 
 // // This if statement could be displayed inside the selectMovie function
 // if (addButton) {
@@ -195,6 +195,7 @@ renderMovies("movie-wrapper", movies);
 
 // Dialog and modals
 // TODO: create new interface and list with reviews. Either for the page itself or for each movie.
+
 openBtn.addEventListener("click", () => {
     formDialog.showModal();
     console.log("Klickat")
