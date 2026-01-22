@@ -15,3 +15,5 @@ export interface IRating {
     source: string;
     score: string;
 }
+
+export type WatchList = "listed" | "unlisted";

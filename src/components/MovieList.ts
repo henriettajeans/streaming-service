@@ -1,5 +1,5 @@
 import { IMovie } from "../models/IMovie.js";
-import { selectMovie } from "../index.js";
+import { selectMovie } from "../components/SingleMovie.js";
 
 
 export const renderMovies = (containerId: string, movies: IMovie[]) => {
@@ -67,3 +67,4 @@ export const renderMovies = (containerId: string, movies: IMovie[]) => {
     }
     )
 }
+

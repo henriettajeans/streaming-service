@@ -7,10 +7,10 @@ console.log("Välkommen till Henriettas film-streaming");
 
 
 
-type WatchList = "listed" | "unlisted";
+
 
 // Creating the data which will be used to display HTML. Can be removed and use API instead.
-const movies: IMovie[] = [
+export const movies: IMovie[] = [
     {
         id: 1,
         title: "Leva lite",
@@ -134,12 +134,6 @@ const movies: IMovie[] = [
 
 // Set VARIABLES to the static HTML elements
 const wrapper = document.querySelector(".movie-wrapper");
-// const wrapperId = document.querySelector("#movie-wrapper");
-const singleMovie = document.querySelector(".single-movie");
-const movieTitle = document.querySelector(".single-movie__title");
-const movieSynopsis = document.querySelector(".single-movie__synopsis");
-const playButton = document.querySelector(".single-movie__play-btn") as HTMLButtonElement;
-const addButton = document.querySelector(".single-movie__add-btn") as HTMLButtonElement;
 
 //Variables to form dialog
 const formDialog = document.querySelector("#add-review-dialog") as HTMLDialogElement;
@@ -153,52 +147,51 @@ const mailInput = document.querySelector("#email-input") as HTMLInputElement;
 
 
 // Add variable to type WatchList
-let listStatus: WatchList = "unlisted";
 
 
 renderMovies("movie-wrapper", movies);
 
-// This if statement could be displayed inside the selectMovie function
-if (addButton) {
-    addButton.addEventListener("click", () => {
-        // console.log("clicked")
-        const iconEvent = addButton.querySelector(".single-movie__add-Btn__icon");
-        if (listStatus === "unlisted") {
-            listStatus = "listed";
-            if (iconEvent) {
-                iconEvent.textContent = "☑️";
-                console.log("Added")
-            }
-        } else {
-            listStatus = "unlisted";
-            console.log("Borttagen")
-            if (iconEvent) {
-                iconEvent.textContent = "Lägg till i listan";
-            }
-        }
+// // This if statement could be displayed inside the selectMovie function
+// if (addButton) {
+//     addButton.addEventListener("click", () => {
+//         // console.log("clicked")
+//         const iconEvent = addButton.querySelector(".single-movie__add-Btn__icon");
+//         if (listStatus === "unlisted") {
+//             listStatus = "listed";
+//             if (iconEvent) {
+//                 iconEvent.textContent = "☑️";
+//                 console.log("Added")
+//             }
+//         } else {
+//             listStatus = "unlisted";
+//             console.log("Borttagen")
+//             if (iconEvent) {
+//                 iconEvent.textContent = "Lägg till i listan";
+//             }
+//         }
 
-    })
-}
+//     })
+// }
 
-if (playButton) {
-    playButton.addEventListener("click", () => {
-        console.log("Buffrar filmen....")
-    })
-}
+// if (playButton) {
+//     playButton.addEventListener("click", () => {
+//         console.log("Buffrar filmen....")
+//     })
+// }
 
-// Select a single movie from deconstructed id
-// TODO: Move to SingleMovie component
-export function selectMovie(id: number) {
-    const selectedMovie = movies.find((movie) => movie.id === id);
+// // Select a single movie from deconstructed id
+// // TODO: Move to SingleMovie component
+// export function selectMovie(id: number) {
+//     const selectedMovie = movies.find((movie) => movie.id === id);
 
-    // If no id was found, exit the function
-    console.log("id:", id);
-    if (!selectedMovie) return;
+//     // If no id was found, exit the function
+//     console.log("id:", id);
+//     if (!selectedMovie) return;
 
-    if (movieTitle) {
-        movieTitle.textContent = selectedMovie.title;
-    }
-}
+//     if (movieTitle) {
+//         movieTitle.textContent = selectedMovie.title;
+//     }
+// }
 
 // Dialog and modals
 // TODO: create new interface and list with reviews. Either for the page itself or for each movie.
