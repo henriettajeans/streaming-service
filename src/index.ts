@@ -1,23 +1,11 @@
 
+import type { IMovie } from "./models/IMovie.js";
+import { renderMovies } from "./components/MovieList.js";
+
 
 console.log("Välkommen till Henriettas film-streaming");
 
-// Setting the data types for the movie objects
-interface IMovie {
-    id: number;
-    title: string;
-    year: number;
-    runtime: number;
-    director: string;
-    plot: string;
-    actors?: string[];
-    poster?: string;
-    rating: IRating;
-}
-interface IRating {
-    source: string;
-    score: string;
-}
+
 
 type WatchList = "listed" | "unlisted";
 
@@ -30,10 +18,13 @@ const movies: IMovie[] = [
         runtime: 132,
         director: "Hans Merkel",
         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
-        rating: {
+        rating:
+        {
+            id: 1,
             source: "IMDB",
             score: "6.7 / 10"
-        }
+        },
+
     },
     {
         id: 2,
@@ -43,6 +34,7 @@ const movies: IMovie[] = [
         director: "Hans Merkel",
         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
         rating: {
+            id: 1,
             source: "IMDB",
             score: "6.7 / 10"
         }
@@ -55,6 +47,7 @@ const movies: IMovie[] = [
         director: "Hans Merkel",
         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
         rating: {
+            id: 1,
             source: "IMDB",
             score: "6.7 / 10"
         }
@@ -67,6 +60,7 @@ const movies: IMovie[] = [
         director: "Hans Merkel",
         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
         rating: {
+            id: 1,
             source: "IMDB",
             score: "6.7 / 10"
         }
@@ -79,6 +73,7 @@ const movies: IMovie[] = [
         director: "Hans Merkel",
         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
         rating: {
+            id: 1,
             source: "IMDB",
             score: "6.7 / 10"
         }
@@ -91,6 +86,7 @@ const movies: IMovie[] = [
         director: "Hans Merkel",
         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
         rating: {
+            id: 1,
             source: "IMDB",
             score: "6.7 / 10"
         }
@@ -103,6 +99,7 @@ const movies: IMovie[] = [
         director: "Hans Merkel",
         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
         rating: {
+            id: 1,
             source: "IMDB",
             score: "6.7 / 10"
         }
@@ -115,6 +112,7 @@ const movies: IMovie[] = [
         director: "Hans Merkel",
         plot: "De bästa vännerna Laura och Alex som är ute på ett couchsurfing-äventyr i Europa. När Laura vaknar upp naken efter att ha haft sex med en främling blir det startpunkten på en resa där Laura inte bara behöver konfronteras med sin pojkvän utan även en växande rädsla att natten inte var frivillig.",
         rating: {
+            id: 1,
             source: "IMDB",
             score: "6.7 / 10"
         }
@@ -127,6 +125,7 @@ const movies: IMovie[] = [
         director: "George Clooney",
         plot: "Ett gäng medelklass-amerikaner bestämmer sig för att genomföra ett rån.",
         rating: {
+            id: 1,
             source: "IMDB",
             score: "6.7 / 10"
         }
@@ -135,6 +134,7 @@ const movies: IMovie[] = [
 
 // Set VARIABLES to the static HTML elements
 const wrapper = document.querySelector(".movie-wrapper");
+// const wrapperId = document.querySelector("#movie-wrapper");
 const singleMovie = document.querySelector(".single-movie");
 const movieTitle = document.querySelector(".single-movie__title");
 const movieSynopsis = document.querySelector(".single-movie__synopsis");
@@ -154,73 +154,9 @@ const mailInput = document.querySelector("#email-input") as HTMLInputElement;
 
 // Add variable to type WatchList
 let listStatus: WatchList = "unlisted";
-console.log(listStatus);
-
-function renderMovies() {
-
-    if (wrapper) {
-
-        // If array with movies is updated
-        wrapper.replaceChildren();
-    }
-    // Loop through the movie array and display the data as HTML elements
-    movies.forEach(({ title, plot, id }) => {
-        // Creating HTML elements
-        const card = document.createElement("article");
-        const titleElement = document.createElement("h3");
-        const plotElement = document.createElement("p");
-        const runtime = document.createElement("span");
-        const director = document.createElement("span");
-
-        // Creating CSS classes
-        card.classList.add("movie-card");
-        titleElement.classList.add("movie-card__title");
-        plotElement.classList.add("movie-card__plot");
-        runtime.classList.add("movie-card__runtime");
-        director.classList.add("movie-card__director");
 
 
-        // Display data inside variables
-        titleElement.textContent = title;
-        plotElement.textContent = plot;
-        // director.textContent = director;
-
-
-        // Set parent and children elements
-        card.append(titleElement, plotElement);
-
-
-        if (wrapper) {
-
-            // Event listener when hovering a card
-            card.addEventListener("mouseover", () => {
-                const currentHover = document.querySelector(".movie-card.hover")
-                if (currentHover) {
-                    currentHover.classList.remove("hover");
-                }
-                card.classList.add("hover");
-            })
-
-            // Event listener when selecting a card
-            card.addEventListener("click", () => {
-                selectMovie(id);
-                console.log("Du har valt", title);
-                const currentSelect = document.querySelector(".movie-card.active")
-                if (currentSelect) {
-                    currentSelect.classList.remove("active");
-                }
-                card.classList.add("active");
-            })
-
-            // Let card be child to wrapper, and display HTML in DOM
-            wrapper.appendChild(card);
-        }
-
-    }
-    )
-}
-
-renderMovies();
+renderMovies("movie-wrapper", movies);
 
 // This if statement could be displayed inside the selectMovie function
 if (addButton) {
@@ -251,19 +187,17 @@ if (playButton) {
 }
 
 // Select a single movie from deconstructed id
-function selectMovie(id: number) {
+// TODO: Move to SingleMovie component
+export function selectMovie(id: number) {
     const selectedMovie = movies.find((movie) => movie.id === id);
 
     // If no id was found, exit the function
-
+    console.log("id:", id);
     if (!selectedMovie) return;
 
     if (movieTitle) {
         movieTitle.textContent = selectedMovie.title;
     }
-
-    // console.log(movie.title, movie.runtime);
-
 }
 
 // Dialog and modals
